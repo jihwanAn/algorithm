@@ -5,15 +5,14 @@
 같은 눈이 2개 === 1,000원+(같은 눈)×100원
 모두 다른 눈 === (그 중 가장 큰 눈)x100원
 
-ex) 3, 3, 6 === 
 */
 
 let fs = require("fs");
-let input = fs.readFileSync("2480.txt").toString().split(" ");
+let numbers = fs.readFileSync("2480.txt").toString().split(" ");
 
-const a = input[0];
-const b = input[1];
-const c = input[2];
+const a = +numbers[0];
+const b = +numbers[1];
+const c = +numbers[2];
 
 let money = 0;
 let maxNum = 0;

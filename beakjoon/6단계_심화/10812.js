@@ -1,22 +1,18 @@
-let [N, ...exes] = require("fs")
-  .readFileSync("10812.txt")
-  .toString()
-  .trim()
-  .split("\n");
+const input = require("fs").readFileSync("10812.txt").toString().split("\n");
+const [n, m] = input[0].split(" ").map(Number);
+let arr = Array(n)
+  .fill()
+  .map((_, i) => i + 1);
 
-const [n, m] = N.split(" ").map(Number);
+for (let x = 1; x <= m; x++) {
+  const [i, j, k] = input[x].split(" ").map(Number);
+  arr = [
+    ...arr.slice(0, i - 1),
+    ...arr.slice(k - 1, j),
+    ...arr.slice(i - 1, k - 1),
+    ...arr.slice(j),
+  ];
+  console.log(arr);
+}
 
-let baskets = new Array(n).fill(0).map((_, i) => i + 1);
-
-const execute = (str) => {
-  const [i, j, k] = str.split(" ").map((e) => +e - 1);
-  const tempBaskets = [...baskets];
-
-  baskets = tempBaskets
-    .slice(0, i)
-    .concat(tempBaskets.slice(k, j + 1).concat(tempBaskets.slice(i, k)))
-    .concat(tempBaskets.slice(j + 1, tempBaskets.length));
-};
-
-exes.forEach(execute);
-console.log(baskets.join(" "));
+console.log(arr.join(" "));

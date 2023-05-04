@@ -17,7 +17,7 @@ for (let i = 2; i <= M; i++) {
     }
   }
 }
-
+console.log(isPrimeNum);
 let ans = "";
 
 for (let i = N; i <= M; i++) {

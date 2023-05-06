@@ -1,32 +1,33 @@
-const fs = require("fs");
-const input = fs
+const input = require("fs")
   .readFileSync("17103.txt")
   .toString()
   .trim()
   .split("\n")
-  .map((v) => parseInt(v));
+  .map(Number);
 
-input.shift();
+const n = input.shift();
 
-const sieve = Array(Math.max(...input) + 1).fill(true);
-sieve[0] = sieve[1] = false;
+const prime = Array(Math.max(...input))
+  .fill(true)
+  .fill(false, 0, 2);
 
-console.log(sieve);
-
-for (let i = 2; i < Math.sqrt(sieve.length); i++) {
-  if (sieve[i]) {
-    for (let j = i + i; j < sieve.length; j += i) {
-      sieve[j] = false;
+for (let i = 2; i < Math.sqrt(prime.length); i++) {
+  if (prime[i]) {
+    for (let j = i + i; j < prime.length; j += i) {
+      prime[j] = false;
     }
   }
 }
 
-const result = input.map((n) => {
-  let count = 0;
-  for (let i = 2; i <= n / 2; i++) {
-    sieve[i] && sieve[n - i] && count++;
+let ans = "";
+for (let i = 0; i < n; i++) {
+  const N = input[i];
+  let cnt = 0;
+  for (let j = 1; j <= N / 2; j++) {
+    if (prime[N - j] && prime[j]) {
+      cnt++;
+    }
   }
-  return count;
-});
-
-console.log(result.join("\n"));
+  ans += cnt + "\n";
+}
+console.log(ans);
